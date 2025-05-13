@@ -42,7 +42,7 @@ X-fcrf-auth: <your-auth-header>
 
 ## ✏️ Step 2: Load the IDU Editor via iFrame
 
-You can open the IDU Editor using an iFrame with either **diamond parameters** or a **requestId** (for updating existing records).
+You can open the IDU Editor using an iFrame with the **diamond parameters** or **diamond parameters** with **requestId**  (for updating existing records).
 
 ### Option A: Load Editor with Diamond Parameters
 
@@ -67,9 +67,9 @@ You can open the IDU Editor using an iFrame with either **diamond parameters** o
 | `trueFaceUp` | string  | Face-up orientation setting            | `Standard`        |
 | `singlePair` | string  | Single or pair selection               | `Single`          |
 
-### Option B: Load Editor with Request ID
+### Option B: Load Editor with Request ID and Diamond Details
 
-You can pass a `requestId` to update an existing IDU record.
+You can pass a `requestId` and `diamond details` to update an existing IDU record.
 
 | Parameter     | Type    | Description                            |
 |---------------|---------|----------------------------------------|
