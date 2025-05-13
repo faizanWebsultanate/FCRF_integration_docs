@@ -5,6 +5,10 @@ This guide describes how to integrate with the FCRF IDU Editor via API and iFram
 
 ---
 
+## Integration Flow Diagram
+
+![mermaid_20250513_476450](https://github.com/user-attachments/assets/586585aa-6bcc-4b90-9c1f-47471d0e0ee1)
+
 ## 🛡️ Step 1: Authenticate and Generate a Token
 
 Use the following API to generate an authentication token with a 30-minute expiry.
@@ -139,7 +143,7 @@ useEffect(() => {
 ```
 
 ---
-![deepseek_mermaid_20250513_476450](https://github.com/user-attachments/assets/586585aa-6bcc-4b90-9c1f-47471d0e0ee1)
+
 
 
 ## 📌 Notes
