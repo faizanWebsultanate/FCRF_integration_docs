@@ -142,6 +142,22 @@ useEffect(() => {
 }, []);
 ```
 
+## 📦 Example Received Data Format:
+
+
+```javascript
+{
+  "update_following_IDU": true,
+  "requestId": "866564668678786",
+  "price_low_range": 5500,
+  "price_high_range": 7000,
+  "colorInnerGrade": 3,
+  "colorDispersion": 2,
+  "colorUndertone": 4
+}
+
+```
+
 ---
 
 
