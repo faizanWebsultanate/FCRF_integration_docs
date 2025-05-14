@@ -54,7 +54,12 @@ You can open the IDU Editor using an iFrame with the **diamond parameters** or *
 | Parameter     | Type    | Description                            | Example           |
 |--------------|---------|----------------------------------------|-------------------|
 | `token`      | string  | API token generated in Step 1          | `abc123`          |
-| `origin_url`      | string  | Use window.location.origin          | `https://ld97yq.csb.app`          |
+| `origin_url`      | string  | Use window.location.origin          | `https://ld97yq.csb.app`  
+
+**Required Diamond Query Parameters:**
+
+| Parameter     | Type    | Description                            | Example           |
+|--------------|---------|----------------------------------------|-------------------|
 | `carat_weight` | number  | Diamond weight in carats              | `1.3`             |
 | `shape`      | string  | Shape of the diamond                   | `Pear`            |
 | `color`      | string  | Color grade                            | `Pink`            |
@@ -70,7 +75,7 @@ You can open the IDU Editor using an iFrame with the **diamond parameters** or *
 
 ### Option B: Load Editor with Request ID and Diamond Details
 
-You can pass a `requestId` and `diamond details` to update an existing IDU record.
+You can pass a `requestId` with `diamond details` to update an existing IDU record.
 
 | Parameter     | Type    | Description                            |
 |---------------|---------|----------------------------------------|
@@ -100,7 +105,7 @@ Use the URL in an `<iframe>` to load the editor in your page:
 
 ```html
 <iframe 
-  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&carat_weight=1.3&origin_url=https://ld97yq.csb.app&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single"
+  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single"
   width="100%"
   height="800"
   frameborder="0"
