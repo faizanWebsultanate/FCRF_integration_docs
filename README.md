@@ -84,12 +84,12 @@ You can pass a `requestId` and `diamond details` to update an existing IDU recor
 
 ### Without `requestId`
 ```
-https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
+https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
 ```
 
 ### With `requestId`
 ```
-https://d1kwyv57dsepak.cloudfront.net/idu-editor?requestId=866564668678786&token=abc123&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
+https://d1kwyv57dsepak.cloudfront.net/idu-editor?requestId=866564668678786&token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
 ```
 
 ---
