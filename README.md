@@ -54,6 +54,7 @@ You can open the IDU Editor using an iFrame with the **diamond parameters** or *
 | Parameter     | Type    | Description                            | Example           |
 |--------------|---------|----------------------------------------|-------------------|
 | `token`      | string  | API token generated in Step 1          | `abc123`          |
+| `origin_url`      | string  | Use window.location.origin          | `https://ld97yq.csb.app`          |
 | `carat_weight` | number  | Diamond weight in carats              | `1.3`             |
 | `shape`      | string  | Shape of the diamond                   | `Pear`            |
 | `color`      | string  | Color grade                            | `Pink`            |
