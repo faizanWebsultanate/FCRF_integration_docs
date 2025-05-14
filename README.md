@@ -100,7 +100,7 @@ Use the URL in an `<iframe>` to load the editor in your page:
 
 ```html
 <iframe 
-  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single"
+  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&carat_weight=1.3&origin_url=https://ld97yq.csb.app&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single"
   width="100%"
   height="800"
   frameborder="0"
