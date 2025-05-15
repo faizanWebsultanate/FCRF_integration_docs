@@ -55,7 +55,10 @@ You can open the IDU Editor using an iFrame with the **diamond parameters** or *
 |--------------|---------|----------------------------------------|-------------------|
 | `token`      | string  | API token generated in Step 1          | `abc123`          |
 | `origin_url`      | string  | Use window.location.origin          | `https://ld97yq.csb.app`  
-| `update_following_idu`      | Boolean (default: false) | True: Using exsiting IDU  | `true` or `false` |  
+| `update_following_idu`      | Boolean  | Optional. For exsiting IDU  | `true` or `false` |  
+
+> ⚠️ update_following_idu is optional and defaults to false.
+When set to true, the system will use the previously stored IDU values for subsequent price calculations without reopening the Iframe.
 
 **Required Diamond Query Parameters:**
 
