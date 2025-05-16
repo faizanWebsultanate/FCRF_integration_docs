@@ -1,34 +1,35 @@
-
 # 🔗 FCRF Third-Party API Integration Guide
 
-This guide describes how to integrate with the FCRF IDU Editor via API and iFrame.
+This guide explains how to integrate the FCRF IDU Editor using API authentication and an embedded iFrame.
 
 ---
 
-## Integration Flow Diagram
+## 🧭 Integration Flow Overview
 
-![mermaid_20250513_476450](https://github.com/user-attachments/assets/586585aa-6bcc-4b90-9c1f-47471d0e0ee1)
+![Integration Flow Diagram](https://github.com/user-attachments/assets/586585aa-6bcc-4b90-9c1f-47471d0e0ee1)
 
-## 🛡️ Step 1: Authenticate and Generate a Token
+---
 
-Use the following API to generate an authentication token with a 30-minute expiry.
+## 🛡️ Step 1: Authenticate and Generate Token
 
-**Endpoint:**  
+Generate an authentication token (valid for 30 minutes) using the following endpoint.
+
+### **Endpoint**
 `POST /api/login`
 
-**Headers Required:**
-```
+### **Headers**
+```http
 X-fcrf-auth: <your-auth-header>
 ```
 
-**Request Body:**
+### **Request Body**
 ```json
 {
   "user_id": "xxxxxxxxxxxxxxxxx"
 }
 ```
 
-**Response Example:**
+### **Sample Response**
 ```json
 {
   "data": {
@@ -42,138 +43,157 @@ X-fcrf-auth: <your-auth-header>
 
 ## ✏️ Step 2: Load the IDU Editor via iFrame
 
-You can open the IDU Editor using an iFrame with the **diamond parameters** or **diamond parameters** with **requestId**  (for updating existing records).
-
-### Option A: Load Editor with Diamond Parameters
-
-**Base URL:**  
+### **Base iFrame URL**
 `https://d1kwyv57dsepak.cloudfront.net/idu-editor`
 
-**Required Query Parameters:**
+### **Common Query Parameters**
 
-| Parameter     | Type    | Description                            | Example           |
-|--------------|---------|----------------------------------------|-------------------|
-| `token`      | string  | API token generated in Step 1          | `abc123`          |
-| `origin_url`      | string  | Use window.location.origin          | `https://ld97yq.csb.app`  
-| `update_following_idu`      | Boolean  | Optional. For exsiting IDU  | `true` or `false` |  
-
-> ⚠️ `update_following_idu` is optional and defaults to `false`.
-When set to `true`, the system will use the previously stored **IDU values** for subsequent price calculations without reopening the Iframe.
-
-**Required Diamond Query Parameters:**
-
-| Parameter     | Type    | Description                            | Example           |
-|--------------|---------|----------------------------------------|-------------------|
-| `carat_weight` | number  | Diamond weight in carats              | `1.3`             |
-| `shape`      | string  | Shape of the diamond                   | `Pear`            |
-| `color`      | string  | Color grade                            | `Pink`            |
-| `saturation` | string  | Saturation description                 | `Fancy Vivid`     |
-| `clarity`    | string  | Clarity grade                          | `VS1`             |
-| `fluorescence` | string | Fluorescence details                  | `Strong Yellow`   |
-| `length`     | number  | Diamond length in mm                   | `15.21`           |
-| `width`      | number  | Diamond width in mm                    | `11.01`           |
-| `polish`     | string  | Polish grade                           | `Excellent`       |
-| `symmetry`   | string  | Symmetry grade                         | `Very Good`       |
-| `trueFaceUp` | string  | Face-up orientation setting            | `Standard`        |
-| `singlePair` | string  | Single or pair selection               | `Single`          |
-
-### Option B: Load Editor with Request ID and Diamond Details
-
-You can pass a `requestId` with `diamond details` to update an existing IDU record.
-
-| Parameter     | Type    | Description                            |
-|---------------|---------|----------------------------------------|
-| `requestId`   | string  | Optional. ID of an existing request    |
-
-> ⚠️ If using `requestId`, it's recommended to pass it **before** other parameters in the query string.
+| Parameter      | Type   | Description                  | Example                    |
+|----------------|--------|------------------------------|----------------------------|
+| `token`        | string | Token generated in Step 1    | `abc123`                   |
+| `origin_url`   | string | Current window origin        | `https://ld97yq.csb.app`   |
 
 ---
 
-## 🌐 Example URLs
+### ✅ Option A: Initial Load with Diamond Parameters
 
-### Without `requestId`
+Load the editor with initial diamond details. No pre-selected IDU options will be used.
+
+#### **Required Parameters**
+
+| Parameter         | Type    | Description                      | Example          |
+|------------------|---------|----------------------------------|------------------|
+| carat_weight     | number  | Diamond weight in carats         | 1.3              |
+| shape            | string  | Shape of the diamond             | Pear             |
+| color            | string  | Color grade                      | Pink             |
+| saturation       | string  | Saturation level                 | Fancy Vivid      |
+| clarity          | string  | Clarity grade                    | VS1              |
+| fluorescence     | string  | Fluorescence description         | Strong Yellow    |
+| length           | number  | Length in mm                     | 15.21            |
+| width            | number  | Width in mm                      | 11.01            |
+| polish           | string  | Polish grade                     | Excellent        |
+| symmetry         | string  | Symmetry grade                   | Very Good        |
+| trueFaceUp       | string  | Face-up orientation              | Standard         |
+| singlePair       | string  | Single or Pair                   | Single           |
+
+> 📝 **Note:** On the "Color Undertone" screen (3rd step), if the checkbox is selected, the chosen IDU option is saved for the next session. To use this saved selection in future requests, add `update_following_idu=true` to the query parameters.
+
+#### **Example URL**
 ```
 https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
 ```
 
-### With `requestId`
+---
+
+### 🔄 Option B: Next Calculation with `update_following_idu=true`
+
+Use this if you've saved IDU options from a previous session. The editor will skip popups and return a calculated price.
+
+#### **Additional Parameter**
+| Parameter            | Type    | Description                          | Example |
+|----------------------|---------|--------------------------------------|---------|
+| update_following_idu | boolean | Use stored IDU options if available  | true    |
+
+#### **Example URL**
 ```
-https://d1kwyv57dsepak.cloudfront.net/idu-editor?requestId=866564668678786&token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
+https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&update_following_idu=true&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
 ```
 
 ---
 
-## 🧩 Step 3: Embed the Editor iFrame
+### 🧾 Option C: Load Editor with `requestId` for Editing
 
-Use the URL in an `<iframe>` to load the editor in your page:
+Pass a valid `requestId` to load a previously submitted request.
 
+#### **Parameters**
+
+| Parameter            | Type    | Description                                         | Example     |
+|----------------------|---------|-----------------------------------------------------|-------------|
+| requestId            | number  | Existing request ID                                 | 786378773767 |
+| update_following_idu | boolean | Optional - open with checkbox checked or not        | true/false  |
+
+#### **Example URL**
+```
+https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&requestId=786378773767&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single
+```
+
+---
+
+## 🧩 Step 3: Embed the Editor via iFrame
+
+### Example HTML iFrames
+
+#### Initial Load
 ```html
 <iframe 
-  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink&saturation=Fancy%20Vivid&clarity=VS1&fluorescence=Strong%20Yellow&length=15.21&width=11.01&polish=Excellent&symmetry=Very%20Good&trueFaceUp=Standard&singlePair=Single"
-  width="100%"
-  height="800"
-  frameborder="0"
-></iframe>
+  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&carat_weight=1.3&shape=Pear&color=Pink..."
+  width="100%" height="800" frameborder="0">
+</iframe>
 ```
 
-After embedding, a popup will open with IDU options.
+#### With `update_following_idu`
+```html
+<iframe 
+  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&update_following_idu=true&carat_weight=1.3..."
+  width="100%" height="800" frameborder="0">
+</iframe>
+```
+
+#### With `requestId`
+```html
+<iframe 
+  src="https://d1kwyv57dsepak.cloudfront.net/idu-editor?token=abc123&origin_url=https://ld97yq.csb.app&requestId=787887878789&carat_weight=1.3..."
+  width="100%" height="800" frameborder="0">
+</iframe>
+```
+
+> A popup will open after the iFrame loads for IDU selection.
 
 ---
 
-## 💰 Step 4: Generate Price via IDU Editor
+## 💰 Step 4: User Interaction in the Editor
 
-When the user completes editing and selects **"NEW IDU"**, they can generate a new price.
+Once editing is complete, users will see:
 
-Two action buttons will be available:
-
-- **Adjust IDU** – Allows users to change parameters and generate a new price.
-- **Apply Price** – Sends the final IDU data to the parent website.
+- **Adjust IDU**: Modify IDU values and recalculate.
+- **Apply Price**: Send the finalized data back to your site.
+- **Close Popup**: Exit without applying changes.
 
 ---
 
-## 🔄 Step 5: Capture Data from the iFrame
+## 🔄 Step 5: Receive Data from the iFrame
 
-Use `window.postMessage` to securely receive data back from the iFrame:
+Use `postMessage` to listen for results from the editor.
 
+### Example Code (React)
 ```javascript
 useEffect(() => {
   const handleMessage = (event) => {
     if (event.origin !== "https://d1kwyv57dsepak.cloudfront.net") return;
-
     console.log("Received data from iframe:", event.data);
     setReceivedData(event.data);
   };
 
   window.addEventListener("message", handleMessage);
-
-  return () => {
-    window.removeEventListener("message", handleMessage);
-  };
+  return () => window.removeEventListener("message", handleMessage);
 }, []);
 ```
 
-## 📦 Example Received Data Format:
-
-
-```javascript
+### Sample Received Data
+```json
 {
   "update_following_IDU": true,
   "requestId": "866564668678786",
   "price_low_range": 5500,
-  "price_high_range": 7000,
-  "colorInnerGrade": 3,
-  "colorDispersion": 2,
-  "colorUndertone": 4
+  "price_high_range": 7000
 }
-
 ```
 
 ---
 
-
-
 ## 📌 Notes
 
-- Always validate the `event.origin` when receiving messages.
-- The token is valid for 30 minutes. Regenerate it if it expires.
-- `requestId` is optional but useful for updating or tracking IDU edits.
+- ✅ Always validate the origin using `event.origin`.
+- ⏳ Token expires in 30 minutes; regenerate as needed.
+- 🧾 `requestId` is optional but useful for edits and tracking.
+- 💡 If `update_following_idu=true` is passed and no session data exists, the system will open the popup as a fallback.
