@@ -185,7 +185,10 @@ useEffect(() => {
   "update_following_IDU": true,
   "requestId": "866564668678786",
   "price_low_range": 5500,
-  "price_high_range": 7000
+  "price_high_range": 7000,
+  "color_inner_grade": "4",
+  "color_dispersion": "4+",
+   "color_undertone": "4+"
 }
 ```
 
